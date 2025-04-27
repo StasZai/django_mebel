@@ -1,0 +1,32 @@
+ <div class="sidebar">
+     <form action="Post" method="get">
+         <ul>
+             {% if categorys %}
+                 {% for category in categorys %}
+                 <li>
+                     <a href="#">
+                       <img class="sidebar-image">
+                           <span class="text">{{ category.name }}</span>
+                     </a>
+                 </li>
+                 {% endfor %}
+             {% else %}
+                <li>
+                       <img class="sidebar-image">
+                           <span class="text">{{ category.name }}</span>
+                           <input type="checkbox"  name="" value="">
+                 </li>
+             {% endif %}
+             {% if characteristics_flag %}
+                {% for characteristic in characteristics %}
+                    <li>
+                           <img class="sidebar-image">
+                               <span class="text">{{ characteristic.name }}</span>
+                           <input type="checkbox"  name="" value="">
+                     </li>
+                {% endfor %}
+             {% endif %}
+             <button type="submit">Найти</button>
+         </ul>
+     </form>
+ </div>

@@ -1,0 +1,121 @@
+{% extends 'mebel/base.html' %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+{% endblock styles %}
+{% block mebel %}
+<div class="panorama catalog-new">
+                    <div class="content">
+                        <div class="catalog-panorama-swiper">
+                            <div class="swiper-wrapper">
+                                {% for slide in slides %}
+                                    <div class="swiper-slide">
+                                        <a href="{{slide.url.url}}"><img src="{{ slide.image.url }}" class="panorama-img"></a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <main>
+                <div class="catalog catalog-new">
+                    <div class="content">
+                        <div class="catalog-title">Новинки:</div>
+                        <!-- Слайдер Swiper для новых товаров -->
+                        <div class="swiper-container catalog-products-swiper">
+                            <div class="swiper-wrapper">
+                                {% for mebel in mebel_list %}
+                                    {% if mebel.is_new %}
+                                        <div class="swiper-slide">
+                                            <a href="{{ mebel.get_absolute_url }}">
+                                                <img src="{{ mebel.poster.url }}">
+                                                <h2>{{ mebel.title }}</h2>
+    <!--                                            <p>{{ mebel.description }}</p>-->
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="catalog catalog-new">
+                    <div class="content">
+                        <div class="catalog-title">Хиты продаж:</div>
+                        <!-- Слайдер Swiper для новых товаров -->
+                        <div class="swiper-container catalog-products-swiper">
+                            <div class="swiper-wrapper">
+                                {% for mebel in mebel_list %}
+                                    {% if mebel.is_hit %}
+                                        <div class="swiper-slide">
+                                            <a href="{{ mebel.get_absolute_url }}">
+                                                <img src="{{ mebel.poster.url }}">
+                                                <h2>{{ mebel.title }}</h2>
+    <!--                                            <p>{{ mebel.description }}</p>-->
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="catalog catalog-new">
+                    <div class="content">
+                        <div class="catalog-title">Акции:</div>
+                        <!-- Слайдер Swiper для новых товаров -->
+                        <div class="swiper-container catalog-products-swiper">
+                            <div class="swiper-wrapper">
+                                {% for mebel in mebel_list %}
+                                    {% if mebel.is_sale %}
+                                        <div class="swiper-slide">
+                                            <a href="{{ mebel.get_absolute_url }}">
+                                                <img src="{{ mebel.poster.url }}">
+                                                <h2>{{ mebel.title }}</h2>
+    <!--                                            <p>{{ mebel.description }}</p>-->
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+<!--MEBEL-->
+<div class="mebels">
+                <div class="content">
+                    <div class="mebels-title">
+                        <p class="mebels-title_text">Колличество предложений: {{ total_mebel }} шт;</p>
+                        <p class="mebels-title_text">Категории:
+                            {% for category in categorys %}
+                                {{ category.name }}{% if not forloop.last %},{%else%};{% endif %}
+                            {% endfor %}
+                        </p>
+                        <p class="mebels-title_text">Характеристики:
+                            {% for characteristic in characteristics %}
+                                {{ characteristic.name }}{% if not forloop.last %},{%else%};{% endif %}
+                            {% endfor %}
+                        </p>
+                    </div>
+                    <ul class="mebels-list">
+                        {% for mebel in mebel_list %}
+                            <li class="mebels-item">
+                                <a href="{{ mebel.get_absolute_url }}">
+                                    <img src="{{ mebel.poster.url }}">
+                                    <h2>{{ mebel.title }}</h2>
+<!--                                    <p>Lorem ipsum dolor sit amet consectetur.</p>-->
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+<!--MEBEL-->
+            </main>
+{% endblock mebel %}
+{% block script %}
+    <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'js/swiper_script.js' %}"></script>
+{% endblock script %}

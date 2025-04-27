@@ -1,0 +1,117 @@
+{% extends 'mebel/base.html' %}
+{% load static %}
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+{% endblock styles %}
+
+{% block fullimg %}
+    <div class="Full-img" id="FullImgBox">
+        <img src="images/static/placeholder.jpg" id="FullImg">
+        <span onclick="closeFullImg()">𐤕</span>
+    </div>
+{% endblock fullimg %}
+
+{% block mebel %}
+<body>
+<!-- Full img -->
+<!--    <div class="Full-img" id="FullImgBox">-->
+<!--        <img src="images/static/placeholder.jpg" id="FullImg">-->
+<!--        <span onclick="closeFullImg()">𐤕</span>-->
+<!--    </div>-->
+    <main>
+        <div class="product">
+            <div class="content">
+                <div class="product-info">
+                    <!-- Interactive img -->
+                    <div class="Big-img" id="BigImgBox">
+                        <img src="{{ mebel.poster.url }}" class="product-img" id="BigImg" onclick="openFullImg(this.src)">
+                    </div>
+                    <!-- <img src="/images/static/placeholder.jpg" class="product-img" onclick="openFullImg(this.src)"> -->
+                    <ul class="product-info-list">
+                        <li>
+                            <div class="product-info-title">
+                                Заголовок / <a href="#">{{ mebel.title }}</a>
+                            </div>
+                        </li>
+<!--                        <li>-->
+<!--                            <a href="#">-->
+<!--                                <button type="submit" class="product-info-button">-->
+<!--                                    Забронировать-->
+<!--                                    <img src="images/static/placeholder.jpg">-->
+<!--                                </button>-->
+<!--                            </a>-->
+<!--                        </li>-->
+                        <li>
+                            <div class="product-info-text">
+                                {{ mebel.description }}
+                            </div>
+                        </li>
+                        <li>
+                            <div class="product-info-title-comments">
+                                Колличество оценок : 100 шт.
+                            </div>
+                        </li>
+                        <li>
+                            <ul class="product-info-raiting">
+                                <li>
+                                    <a href="#">
+                                    <img src="images/static/black_star.png">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                    <img src="images/static/black_star.png">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                    <img src="images/static/black_star.png">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                    <img src="images/static/black_star.png">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                    <img src="images/static/black_star.png">
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="product-slider">
+                    <div class="catalog catalog-new">
+                        <div class="content">
+                            <div class="catalog-title">Ракурсы : {{ mebel.mebelangles_set.count }} шт.</div>
+                            <!-- Слайдер Swiper для новых товаров -->
+                            <div class="swiper-container catalog-products-swiper">
+                                <div class="swiper-wrapper">
+                                    {% for angle in mebel.mebelangles_set.all %}
+                                        <div class="swiper-slide">
+                                            <a href="#">
+                                                <img src="{{ angle.image.url }}" onclick="openBigImg(this.src)">
+                                            </a>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <br>
+    <br>
+{% endblock mebel %}
+{% block script %}
+    <script src="{% static 'js/swiper-bundle.min.js' %}"></script>
+    <script src="{% static 'js/swiper_script.js' %}"></script>
+    <script src="{% static 'js/big_img.js' %}"></script>
+    <script src="{% static 'js/full_img.js' %}"></script>
+{% endblock script %}
