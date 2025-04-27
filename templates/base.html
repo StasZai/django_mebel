@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block styles %}
+{% endblock styles %}
+    <title>
+{% if mebel.title %} {{ mebel.title }} {% else %} mebel_list {% endif %}
+    </title>
+</head>
+<body>
+<!--    SIDEBAR    -->
+        {% include 'include/sidebar.html' %}
+<!--    SIDEBAR    -->
+<!--    HEADER    -->
+        {% include 'include/header.html' %}
+<!--    HEADER    -->
+<!--    FULLIMG    -->
+{% block fullimg %} {% endblock fullimg %}
+<!--    FULLIMG    -->
+<!--    MEBEL    -->
+{% block mebel %} {% endblock mebel %}
+<!--    MEBEL    -->
+<!--    FOOTER    -->
+        {% include 'include/footer.html' %}
+<!--    FOOTER    -->
+<!--    SCRIPT    -->
+{% block script %} {% endblock script %}
+<!--    SCRIPT    -->
+</body>
+</html>
