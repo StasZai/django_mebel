@@ -20,6 +20,9 @@
                     </div>
                 </div>
             <main>
+                {% if is_new_is_hit_is_sale %}
+                <br>
+                {% else %}
                 <div class="catalog catalog-new">
                     <div class="content">
                         <div class="catalog-title">Новинки:</div>
@@ -83,20 +86,34 @@
                         </div>
                     </div>
                 </div>
+            {% endif %}
 <!--MEBEL-->
 <div class="mebels">
                 <div class="content">
                     <div class="mebels-title">
-                        <p class="mebels-title_text">Колличество предложений: {{ total_mebel }} шт;</p>
+
+                        <p class="mebels-title_text">Колличество предложений:
+                            {% if is_new_is_hit_is_sale %}
+                            {{ total_filtered_mebel}}{% else %}{{total_mebel}}{% endif %}/{{total_mebel}}
+                            шт;
+                        </p>
                         <p class="mebels-title_text">Категории:
-                            {% for category in categorys %}
-                                {{ category.name }}{% if not forloop.last %},{%else%};{% endif %}
-                            {% endfor %}
+                            {% if is_new_is_hit_is_sale %}
+                                {% for category in categories %}
+                                    {{ category.name }}{% if not forloop.last %},{%else%};{% endif %}
+                                {% endfor %}
+                            {% else %}
+                                Все;
+                            {% endif %}
                         </p>
                         <p class="mebels-title_text">Характеристики:
-                            {% for characteristic in characteristics %}
-                                {{ characteristic.name }}{% if not forloop.last %},{%else%};{% endif %}
-                            {% endfor %}
+                            {% if is_new_is_hit_is_sale %}
+                                {% for characteristic in characteristics %}
+                                    {{ characteristic.name }}{% if not forloop.last %},{%else%};{% endif %}
+                                {% endfor %}
+                            {% else %}
+                                Все;
+                            {% endif %}
                         </p>
                     </div>
                     <ul class="mebels-list">

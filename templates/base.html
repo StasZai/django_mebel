@@ -24,7 +24,10 @@
 {% block mebel %} {% endblock mebel %}
 <!--    MEBEL    -->
 <!--    FOOTER    -->
+{% if is_new_is_hit_is_sale %}
+{% else %}
         {% include 'include/footer.html' %}
+{% endif %}
 <!--    FOOTER    -->
 <!--    SCRIPT    -->
 {% block script %} {% endblock script %}

@@ -9,6 +9,12 @@
     z-index: 10;
 }
 
+.sidebar .sidebar-title {
+    margin-left: 60px;
+    font-size: 1.5em;
+    padding-top: 10px;
+}
+
 .sidebar:hover {
     width: 300px;
 }

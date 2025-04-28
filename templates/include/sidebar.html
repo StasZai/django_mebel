@@ -1,31 +1,38 @@
- <div class="sidebar">
-     <form action="Post" method="get">
+<div class="sidebar">
+     <form action="{% url 'filter' %}" method="get">
          <ul>
-             {% if categorys %}
-                 {% for category in categorys %}
-                 <li>
-                     <a href="#">
-                       <img class="sidebar-image">
-                           <span class="text">{{ category.name }}</span>
-                     </a>
-                 </li>
-                 {% endfor %}
-             {% else %}
-                <li>
-                       <img class="sidebar-image">
-                           <span class="text">{{ category.name }}</span>
-                           <input type="checkbox"  name="" value="">
-                 </li>
-             {% endif %}
-             {% if characteristics_flag %}
-                {% for characteristic in characteristics %}
-                    <li>
+             {% if list %}
+             <h2 class="sidebar-title">Категории:</h2>
+                {% for category in view.get_categorys %}
+                     <li>
+                         <a href="{% url 'filter' %}?category={{ category.id }}">
                            <img class="sidebar-image">
-                               <span class="text">{{ characteristic.name }}</span>
-                           <input type="checkbox"  name="" value="">
+                               <span class="text">{{ category.name }}</span>
+                             <input type="hidden"  name="category" value="{{ category.id }}">
+                         </a>
                      </li>
                 {% endfor %}
              {% endif %}
+                {% if detail %}
+                    <h2 class="sidebar-title">Категории:</h2>
+                    {% for category in view.get_categorys %}
+                         <li>
+                             <a href="#">
+                               <img class="sidebar-image">
+                                   <span class="text">{{ category.name }}</span>
+                                 <input type="checkbox"  name="category" value="{{ category.id }}">
+                             </a>
+                         </li>
+                    {% endfor %}
+                    <h2 class="sidebar-title">Характеристики:</h2>
+                    {% for characteristic in characteristics %}
+                        <li>
+                               <img class="sidebar-image">
+                                   <span class="text">{{ characteristic.name }}</span>
+                               <input type="checkbox"  name="characteristic" value="{{ characteristic.id }}">
+                         </li>
+                    {% endfor %}
+                {% endif %}
              <button type="submit">Найти</button>
          </ul>
      </form>

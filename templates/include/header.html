@@ -2,15 +2,23 @@
 <header>
         <div class="search">
             <div class="content">
-                <a href="#">
-                   <img src="{% static 'images/logo/logo.png' %}" class="logo-img">
-                </a>
+                {% if self_link %}
+                    <img src="{% static 'images/logo/logo.png' %}" class="logo-img">
+                {% else %}
+                    <a href="/">
+                       <img src="{% static 'images/logo/logo.png' %}" class="logo-img">
+                    </a>
+                {% endif %}
                    <div class="search-inner">
                        <input type="text" placeholder="Поиск..." class="search-input">
                              <button type="submit" class="search-button">Поиск</button>
                        </div>
                              <ul class="search-list">
+                             {% if self_link %}
+                                <li>Главная</li>
+                             {% else %}
                                 <li><a href="/">Главная</a></li>
+                             {% endif %}
                                 <li><a href="#">Каталог</a></li>
                                 <li><a href="#">О нас</a></li>
 <!--                            <li><a href="#">Контакты</a></li>-->
