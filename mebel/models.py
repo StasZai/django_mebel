@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Avg
 from django.urls import reverse
 
 
@@ -61,6 +62,13 @@ class Mebel(models.Model):
     def get_absolute_url(self):
         return reverse('mebel_detail', kwargs={"slug": self.url})
 
+    def get_average_rating(self):
+        ratings = Rating.objects.filter(mebel=self)
+        if ratings.exists():
+            total = sum([r.star.value for r in ratings])
+            return total / len(ratings)
+        return 0
+
     class Meta:
         verbose_name = "Мебель"
         verbose_name_plural = "Мебель"
@@ -83,11 +91,12 @@ class RatingStar(models.Model):
     value = models.SmallIntegerField("Значение", default=0)
 
     def __str__(self):
-        return self.value
+        return f'{self.value}'
 
     class Meta:
         verbose_name = "Звезда рейтинга"
         verbose_name_plural = "Звезды рейтинга"
+        ordering = ["-value"]
 
 
 class Slides(models.Model):
