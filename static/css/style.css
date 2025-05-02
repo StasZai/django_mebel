@@ -267,6 +267,21 @@ footer a, .mebels .mebels-item h2, .mebels .mebels-item p, .mebels .mebels-title
   width: 30px;
 }
 
+.product .product-info-content {
+    display: flex;
+    align-items:center;
+    padding-bottom: 10px;
+}
+
+.product .product-raiting-image {
+    width: 30px;
+}
+
+.product .product-info-title-raiting {
+    font-size: 20px;
+    padding-right: 10px;
+}
+
 .form .form-title {
   margin-bottom: 10px;
 }
@@ -517,3 +532,41 @@ footer .contacts-list li {
 footer img {
   max-width: 40px;
 }
+
+
+/* Checkbox stars */
+.rating {
+  overflow: hidden;
+  vertical-align: bottom;
+  display: inline-block;
+  width: 155px;
+  height: 30px;
+}
+
+.rating > input {
+  opacity: 0;
+  margin-right: -100%;
+}
+
+.rating > label {
+  position: relative;
+  display: block;
+  float: right;
+  background: url('../images/stars/star-off-big.png');
+  background-size: 30px 30px;
+}
+
+.rating > label:before {
+  display: block;
+  opacity: 0;
+  content: '';
+  width: 30px;
+  height: 30px;
+  background: url('../images/stars/star-on-big.png');
+  background-size: 30px 30px;
+  transition: opacity 0.2s linear;
+}
+
+.rating > label:hover:before,  .rating > label:hover ~ label:before,  .rating:not(:hover) > :checked ~ label:before { opacity: 1; }
+/* //Checkbox stars */
+

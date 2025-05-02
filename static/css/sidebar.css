@@ -9,6 +9,13 @@
     z-index: 10;
 }
 
+.sidebar .sidebar-title {
+    margin-left: 60px;
+    font-size: 1.5em;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 .sidebar:hover {
     width: 300px;
 }
@@ -32,7 +39,6 @@
     align-items: center;
     white-space: nowrap;
     text-decoration: none;
-    padding-top: 10px;
 }
 
 .sidebar ul li  .sidebar-image, .sidebar ul li  .sidebar-image a{
