@@ -50,37 +50,36 @@
                         </li>
                         <li>
                             <div class="product-info-title-comments">
-                                Колличество оценок : 100 шт.
+<!--                               Колличество оценок : {{ rating_count }} шт. -->
                             </div>
                         </li>
                         <li>
-                            <ul class="product-info-raiting">
-                                <li>
-                                    <a href="#">
-                                    <img src="images/static/black_star.png">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                    <img src="images/static/black_star.png">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                    <img src="images/static/black_star.png">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                    <img src="images/static/black_star.png">
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#">
-                                    <img src="images/static/black_star.png">
-                                    </a>
-                                </li>
+                            <ul class="product-info-content">
+                                <span class="product-info-title-raiting">Рейтинг:</span>
+                                {% with average_rating=mebel.get_average_rating %}
+                                    {% for i in "12345" %}
+                                        {% if average_rating >= forloop.counter %}
+                                            <li><img class="product-raiting-image" src="{% static 'images/stars/star-on-big.png' %}"></li> <!-- Полная звезда -->
+                                        {% else %}
+                                            <li><img class="product-raiting-image" src="{% static 'images/stars/star-off-big.png' %}"></li> <!-- Пустая звезда -->
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endwith %}
                             </ul>
+                        </li>
+                        <li>
+                            <form class="product-info-content" action="{% url 'add_rating' %}" method="post" name="rating">
+                                <span class="product-info-title-raiting">Личная оценка:</span>
+                                {% csrf_token %}
+                                <input type="hidden" value="{{ mebel.id }}" name="mebel">
+                                <span class="rating">
+                                    {% for k, v in star_form.fields.star.choices %}
+                                        <input id="rating{{ v }}" type="radio" name="star"
+                                               value="{{ k }}">
+                                        <label for="rating{{ v }}">{{ k }}</label>
+                                    {% endfor %}
+                                </span>
+                            </form>
                         </li>
                     </ul>
                 </div>
@@ -114,4 +113,5 @@
     <script src="{% static 'js/swiper_script.js' %}"></script>
     <script src="{% static 'js/big_img.js' %}"></script>
     <script src="{% static 'js/full_img.js' %}"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
 {% endblock script %}
